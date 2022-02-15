@@ -1,13 +1,11 @@
-#!/usr/bin/env python3
-
 import random
 from string import ascii_lowercase
 from typing import *
 
-from leet_objects import ListNode
+from objects import *
 
 
-def pathological_integer_list(lowest=1, highest=1000, length=500, sorted_=False):
+def randomintegers(lowest=1, highest=1000, length=500, sorted_=False):
     """ Return a list of random integer values, optionally sorted """
     
     ints = [random.randint(lowest, highest) for _ in range(length)]
@@ -20,10 +18,10 @@ def pathological_integer_list(lowest=1, highest=1000, length=500, sorted_=False)
         return ints
 
 
-def pathological_string(length=500, sorted=False, *, chars=ascii_lowercase):
+def randomstring(length=500, sorted=False, *, chars=ascii_lowercase):
     """ Return a string of random characters, optionally sorted  """
     
-    garbled =  ''.join([random.choice([chars] for _ in range(length))])
+    garbled =  ''.join([random.choice(chars) for _ in range(length)])
 
     if sorted_ in {True, 'ascending'}:
         return sorted(garbled)
@@ -33,7 +31,7 @@ def pathological_string(length=500, sorted=False, *, chars=ascii_lowercase):
         return garbled
 
 
-def singly_linked_list(vals: List) -> Optional[ListNode]:
+def sll(vals: List) -> Optional[ListNode]:
     """ Return the head of a singly-linked list """
     
     if not vals:
@@ -52,7 +50,7 @@ def singly_linked_list(vals: List) -> Optional[ListNode]:
     return head
 
 
-def circular_linked_list(vals: List) -> Optional[ListNode]:
+def cll(vals: List) -> Optional[ListNode]:
     """ Return the head of a singly-linked circular list """
 
     if not vals:
@@ -73,7 +71,7 @@ def circular_linked_list(vals: List) -> Optional[ListNode]:
     return head
 
 
-def doubly_linked_list(vals: List) -> Optional[ListNode]:
+def dll(vals: List) -> Optional[ListNode]:
     """ Return the head of a doubly-linked list """
 
     if not vals:
@@ -93,7 +91,7 @@ def doubly_linked_list(vals: List) -> Optional[ListNode]:
     return head
 
 
-def doubly_circular_list(vals: List) -> Optional[ListNode]:
+def dcl(vals: List) -> Optional[ListNode]:
     """ Return the head of a doubly-linked circular list """
 
     if not vals:
@@ -116,10 +114,47 @@ def doubly_circular_list(vals: List) -> Optional[ListNode]:
     return head
 
 
-def test_cases():
-    pass
+def b_tree(vals):
+    """ Returns the root node of a binary tree constructed from a list of node values """
+    
+    if not vals:
+        return None
+
+    root = TreeNode(vals.pop(0))
+    current = root
+    side = 'left'
+    next_nodes = []
+
+    while vals:
+        
+        val = vals.pop(0)
+        if val:
+            next_node = TreeNode(val)
+            setattr(current, side, next_node)
+            next_nodes.append(next_node)
+        
+        side = 'right' if side == 'left' else 'left'
+        if side == 'left':
+            try:
+                current = next_nodes.pop(0)
+            except IndexError:
+                break
+    
+    return root
 
 
-def binary_tree():
-    pass
+def testcases(function: Callable, inpt_outpt: Tuple) -> Union[Dict, bool]:
+    """ Performs function on inpt and checks if outpt matches """
 
+    failures = dict()
+    for inpt, outpt in inpt_outpt:
+        if function(inpt) == outpt:
+            print(f'{function.__name__} succeeded with {inpt}, producing: {outpt}')
+        else:
+            failures[inpt] = outpt
+            print(f'{function.__name__} failed with {inpt}, producing: {outpt}')
+
+    if failures:
+        return failures
+
+    return True
