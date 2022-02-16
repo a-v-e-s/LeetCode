@@ -5,7 +5,7 @@ from typing import *
 from objects import *
 
 
-def randomintegers(lowest=1, highest=1000, length=500, sorted_=False):
+def r_ints(lowest=1, highest=1000, length=500, sorted_=False):
     """ Return a list of random integer values, optionally sorted """
     
     ints = [random.randint(lowest, highest) for _ in range(length)]
@@ -18,7 +18,7 @@ def randomintegers(lowest=1, highest=1000, length=500, sorted_=False):
         return ints
 
 
-def randomstring(length=500, sorted=False, *, chars=ascii_lowercase):
+def r_string(length=500, sorted=False, *, chars=ascii_lowercase):
     """ Return a string of random characters, optionally sorted  """
     
     garbled =  ''.join([random.choice(chars) for _ in range(length)])
@@ -143,16 +143,20 @@ def b_tree(vals):
     return root
 
 
-def testcases(function: Callable, inpt_outpt: Tuple) -> Union[Dict, bool]:
+def testcases(function: Callable, inpt_outpt: List[Tuple]) -> Union[Dict, bool]:
     """ Performs function on inpt and checks if outpt matches """
 
     failures = dict()
     for inpt, outpt in inpt_outpt:
-        if function(inpt) == outpt:
-            print(f'{function.__name__} succeeded with {inpt}, producing: {outpt}')
-        else:
-            failures[inpt] = outpt
-            print(f'{function.__name__} failed with {inpt}, producing: {outpt}')
+        try:
+            if function(inpt) == outpt:
+                print(f'{function.__name__} succeeded with {inpt}, producing: {outpt}')
+            else:
+                failures[inpt] = outpt
+                print(f'{function.__name__} failed with {inpt}, producing: {outpt}')
+        except Exception as e:
+            failures[inpt] = e
+            print(f'{function.__name__} failed with error {e}')
 
     if failures:
         return failures
