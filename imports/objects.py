@@ -1,4 +1,5 @@
 null = None
+pr = print
 
 
 class ListNode:
@@ -34,11 +35,11 @@ class TreeNode:
     def __repr__(self):
         if self.left:
             if self.right:
-                return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: {hex(id(self.left))}\n\tright: {hes(id(self.right))}'
+                return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: {hex(id(self.left))}\n\tright: {hex(id(self.right))}'
             else:
                 return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: {hex(id(self.left))}\n\tright: None'
         elif self.right:
-            return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: None\n\tright: {hes(id(self.right))}'
+            return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: None\n\tright: {hex(id(self.right))}'
         else:
             return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: None\n\tright: None'
         

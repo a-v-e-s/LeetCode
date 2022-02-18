@@ -2,7 +2,7 @@ import random
 from string import ascii_lowercase
 from typing import *
 
-from objects import *
+from .objects import *
 
 
 def r_ints(lowest=1, highest=1000, length=500, sorted_=False):
@@ -18,7 +18,7 @@ def r_ints(lowest=1, highest=1000, length=500, sorted_=False):
         return ints
 
 
-def r_string(length=500, sorted=False, *, chars=ascii_lowercase):
+def r_string(length=500, sorted_=False, *, chars=ascii_lowercase):
     """ Return a string of random characters, optionally sorted  """
     
     garbled =  ''.join([random.choice(chars) for _ in range(length)])
