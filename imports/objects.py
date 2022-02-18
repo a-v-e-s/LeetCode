@@ -12,11 +12,10 @@ class ListNode:
     
 
     def __repr__(self):
-        if self.prev:
-            if self.next:
-                return f'ListNode <{hex(id(self))}>\n\tval: {self.val}\n\tprev: {hex(id(self.prev))}\n\tnext: {hex(id(self.next))}'
-            else:
-                return f'ListNode <{hex(id(self))}>\n\tval: {self.val}\n\tprev: {hex(id(self.prev))}\n\tnext: None'
+        if self.prev and self.next:
+            return f'ListNode <{hex(id(self))}>\n\tval: {self.val}\n\tprev: {hex(id(self.prev))}\n\tnext: {hex(id(self.next))}'
+        elif self.prev:
+            return f'ListNode <{hex(id(self))}>\n\tval: {self.val}\n\tprev: {hex(id(self.prev))}\n\tnext: None'
         elif self.next:
             return f'ListNode <{hex(id(self))}>\n\tval: {self.val}\n\tprev: None\n\tnext: {hex(id(self.next))}'
         else:
@@ -33,13 +32,12 @@ class TreeNode:
     
 
     def __repr__(self):
-        if self.left:
-            if self.right:
-                return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: {hex(id(self.left))}\n\tright: {hex(id(self.right))}'
-            else:
-                return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: {hex(id(self.left))}\n\tright: None'
+        if self.left and self.right:
+            return f'TreeNode <{hex(id(self))}>\nt\tval: {self.val}\n\tleft: {hex(id(self.left))}\n\tright: {hex(id(self.right))}'
+        elif self.left:
+            return f'TreeNode <{hex(id(self))}>\nt\tval: {self.val}\n\tleft: {hex(id(self.left))}\n\tright: None'
         elif self.right:
-            return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: None\n\tright: {hex(id(self.right))}'
+            return f'TreeNode <{hex(id(self))}>\nt\tval: {self.val}\n\tleft: None\n\tright: {hex(id(self.right))}'
         else:
-            return f'TreeNode <{hex(id(self))}>\nt\val: {self.val}\n\tleft: None\n\tright: None'
+            return f'TreeNode <{hex(id(self))}>\nt\tval: {self.val}\n\tleft: None\n\tright: None'
         

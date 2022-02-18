@@ -1,3 +1,4 @@
+from copy import copy
 import random
 from string import ascii_lowercase
 from typing import *
@@ -116,18 +117,19 @@ def dcl(vals: List) -> Optional[ListNode]:
 
 def b_tree(vals):
     """ Returns the root node of a binary tree constructed from a list of node values """
-    
+
     if not vals:
         return None
 
-    root = TreeNode(vals.pop(0))
+    cvals = copy(vals)
+    root = TreeNode(cvals.pop(0))
     current = root
     side = 'left'
     next_nodes = []
 
-    while vals:
+    while cvals:
         
-        val = vals.pop(0)
+        val = cvals.pop(0)
         if val:
             next_node = TreeNode(val)
             setattr(current, side, next_node)
