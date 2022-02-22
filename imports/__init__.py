@@ -21,6 +21,7 @@ from typing import *
 from . import constructors
 from . import objects
 from . import my_decorators
+from .aliases import *
 from .constructors import *
 from .objects import *
 from .my_decorators import *

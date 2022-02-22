@@ -145,7 +145,44 @@ def b_tree(vals):
     return root
 
 
-def testcases(function: Callable, inpt_outpt: List[Tuple]) -> Union[Dict, bool]:
+def bs_tree(vals: List[int]) -> TreeNode:
+    """ construct a valid binary search tree and returns the root node"""
+
+    assert len(set(vals)) == len(vals), 'vals must not contain any duplicates!'
+
+    
+    def recurse(local_vals, prev, side):
+        
+        mid = len(local_vals) // 2
+        node = TreeNode(local_vals[mid])
+
+        setattr(prev, side, node)
+        
+        left_vals = local_vals[:mid]
+        right_vals = local_vals[mid+1:]
+        
+        if left_vals:
+            recurse(left_vals, node, 'left')
+        if right_vals:
+            recurse(right_vals, node, 'right')
+    
+
+    vals = sorted(vals)
+    mid = len(vals) // 2
+    root = TreeNode(vals[mid])
+    
+    left_vals = vals[:mid]
+    right_vals = vals[mid+1:]
+    
+    if left_vals:
+        recurse(left_vals, root, 'left')
+    if right_vals:
+        recurse(right_vals, root, 'right')
+    
+    return root
+
+
+def run_testcases(function: Callable, inpt_outpt: List[Tuple]) -> Union[Dict, bool]:
     """ Performs function on inpt and checks if outpt matches """
 
     failures = dict()
