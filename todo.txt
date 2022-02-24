@@ -1,1 +1,2 @@
 tests
+make_verbose function?

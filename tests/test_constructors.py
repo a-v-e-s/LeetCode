@@ -159,5 +159,6 @@ class Test_Constructors(unittest.TestCase):
         failures = run_testcases(function, inpt_outpt, True)
         self.assertEqual(len(failures), 10)
 
+
 if __name__ == '__main__':
     unittest.main()
