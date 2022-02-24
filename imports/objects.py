@@ -3,9 +3,9 @@
 """
 
 
-class Graph:
+class DisjointSet:
     """ 
-    Graph data structure and related methods
+    Disjoint Set data structure and related methods
     optimized with path compression and union by rank
     """
 
@@ -47,6 +47,14 @@ class Graph:
     def connected(self, x, y):
         """ return whether or not nodes x and y are connected """
         return self.find(x) == self.find(y)
+
+
+class Undirected_Graph_Node:
+    """ Undirected Graph Node object """
+
+    def __init__(self, val=0, neighbors=None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
 
 
 class ListNode:
@@ -106,7 +114,7 @@ class TreeNode:
 
     def __repr__(self):
         
-        tmplt = 'TreeNode <{}>\nt\tval: {}\n\tleft: {}\n\tright: {}'
+        tmplt = 'TreeNode <{}>\n\tval: {}\n\tleft: {}\n\tright: {}'
         
         if self.left and self.right:
             return tmplt.format(

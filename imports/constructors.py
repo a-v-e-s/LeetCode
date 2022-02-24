@@ -182,20 +182,23 @@ def bs_tree(vals: List[int]) -> TreeNode:
     return root
 
 
-def run_testcases(function: Callable, inpt_outpt: List[Tuple]) -> Union[Dict, bool]:
+def run_testcases(function: Callable, inpt_outpt: List[Tuple], silent=False) -> Union[Dict, bool]:
     """ Performs function on inpt and checks if outpt matches """
 
     failures = dict()
     for inpt, outpt in inpt_outpt:
         try:
             if function(inpt) == outpt:
-                print(f'{function.__name__} succeeded with {inpt}, producing: {outpt}')
+                if not silent:
+                    print(f'{function.__name__} succeeded with {inpt}, producing: {outpt}')
             else:
                 failures[inpt] = outpt
-                print(f'{function.__name__} failed with {inpt}, producing: {outpt}')
+                if not silent:
+                    print(f'{function.__name__} failed with {inpt}, producing: {outpt}')
         except Exception as e:
             failures[inpt] = e
-            print(f'{function.__name__} failed with error {e}')
+            if not silent:
+                print(f'{function.__name__} failed with error {e}')
 
     if failures:
         return failures
