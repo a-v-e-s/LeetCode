@@ -18,6 +18,14 @@ import time
 import typing
 from typing import *
 
+try:
+    import sortedcontainers
+except ImportError:
+    print('failed to import sortedcontainers')
+    print('consider installing with pip')
+    print('or switching virtual environments')
+
+
 from . import constructors
 from . import objects
 from . import my_decorators
