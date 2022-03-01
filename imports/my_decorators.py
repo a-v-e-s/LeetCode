@@ -4,18 +4,28 @@ import _thread
 import sys
 
 
-def count_executions_of(function):
-    
+def count_executions_of(return_executions=False):
+    """ counts executions of decorated function """
+
     executions = 0
 
-    def wrapper(*args, **kwargs):
+    def inner(function):
+
+        def wrapper(*args, **kwargs):
     
-        nonlocal executions
-        function(*args, **kwargs)
-        executions += 1
-        print(f'{function.__name__} executed {executions} times!')
+            nonlocal executions
+            ret = function(*args, **kwargs)
+            executions += 1
+            print(f'{function.__name__} executed {executions} times!')
+            
+            if return_executions:
+                return ret, executions
+            else:
+                return ret
     
-    return wrapper
+        return wrapper
+    
+    return inner
 
 
 def exit_after(s):
@@ -44,19 +54,26 @@ def exit_after(s):
     return outer
 
 
-def timer(f):
+def timer(return_time=False):
     """ times a function """
 
-    def wrapped_f(*args, **kwargs):
+    def inner(function):
 
-        start = time.time()
-        result = f(*args, **kwargs)
-        end = time.time()
-        print('Time Elapsed:\t'+str(end-start)+' seconds')
+        def wrapped_f(*args, **kwargs):
+
+            start = time.perf_counter()
+            result = function(*args, **kwargs)
+            elapsed = time.perf_counter() - start
+            print('Time Elapsed:\t'+str(elapsed)+' seconds')
+
+            if return_time:
+                return result, elapsed
+            else:
+                return result
         
-        return result
+        return wrapped_f
     
-    return wrapped_f
+    return inner
 
 
 class recursive_timer:
@@ -65,6 +82,7 @@ class recursive_timer:
     def __init__(self, f):
         self.f = f
         self.active = False
+        self.return_time = False
     
     def __call__(self, *args, **kwargs):
         
@@ -77,7 +95,10 @@ class recursive_timer:
             val = self.f(*args, **kwargs)
             elapsed = time.perf_counter() - start
             print(f'Elapsed time:\t{elapsed} seconds')
-            return val
+            if self.return_time:
+                return val, elapsed
+            else:
+                return val
         
         finally:
             self.active = False
