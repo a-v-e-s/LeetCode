@@ -3,6 +3,7 @@ All the things I commonly use to help solve LeetCode problems
 """
 
 
+import array
 import bisect
 import collections
 import copy
