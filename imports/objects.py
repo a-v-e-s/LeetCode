@@ -67,40 +67,15 @@ class ListNode:
     
 
     def __repr__(self):
-
         tmplt = 'ListNode <{}>\n\tval: {}\n\tprev: {}\n\tnext: {}'
-        
         if self.prev and self.next:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                hex(id(self.prev)),
-                hex(id(self.next))
-            )
-        
+            return tmplt.format(hex(id(self)), self.val, hex(id(self.prev)), hex(id(self.next)))
         elif self.prev:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                hex(id(self.prev)),
-                None
-            )
-        
+            return tmplt.format(hex(id(self)), self.val, hex(id(self.prev)), None)
         elif self.next:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                None,
-                hex(id(self.next))
-            )
-        
+            return tmplt.format(hex(id(self)), self.val, None, hex(id(self.next)))
         else:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                None,
-                None
-            )
+            return tmplt.format(hex(id(self)), self.val, None, None)
 
 
 class TreeNode:
@@ -113,38 +88,13 @@ class TreeNode:
     
 
     def __repr__(self):
-        
         tmplt = 'TreeNode <{}>\n\tval: {}\n\tleft: {}\n\tright: {}'
-        
         if self.left and self.right:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                hex(id(self.left)),
-                hex(id(self.right))
-            )
-        
+            return tmplt.format(hex(id(self)), self.val, hex(id(self.left)), hex(id(self.right)))
         elif self.left:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                hex(id(self.left)),
-                None
-            )
-        
+            return tmplt.format(hex(id(self)), self.val, hex(id(self.left)), None)
         elif self.right:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                None,
-                hex(id(self.right))
-            )
-        
+            return tmplt.format(hex(id(self)), self.val, None, hex(id(self.right)))
         else:
-            return tmplt.format(
-                hex(id(self)),
-                self.val,
-                None,
-                None
-            )
+            return tmplt.format(hex(id(self)), self.val, None, None)
         
