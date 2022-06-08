@@ -4,6 +4,55 @@
 
 
 class DisjointSet:
+    """
+    My Implementation of disjoint set data structure;
+    Currently a work in progress.
+    """
+    
+    def __init__(self, vertices):
+        self.vertices = vertices
+        self.graph = DefaultDict(set)
+    
+    
+    def add_edge(self, u, v):
+        """ adds a connection between 2 vertices in the graph """
+
+        self.graph[u].add(v)
+        self.graph[v].add(u)
+    
+
+    def subnets(self):
+        """ returns a list of subnets """
+        
+        subnets = list()
+        seen = set()
+        
+        for vertex in range(self.vertices):
+            if vertex in seen:
+                continue
+            
+            subnet = set()
+            current = {vertex}
+            
+            while current:
+                nxt = set()
+                
+                for node in current:
+                    if node in seen:
+                        continue
+                    
+                    seen.add(node)
+                    nxt |= self.graph[node]
+                
+                subnet |= current
+                current = nxt
+            
+            subnets.append(subnet)
+        
+        return subnets
+
+
+class UnionFind:
     """ 
     Disjoint Set data structure and related methods
     optimized with path compression and union by rank
