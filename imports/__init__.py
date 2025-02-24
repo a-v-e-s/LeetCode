@@ -19,7 +19,21 @@ import random
 import string
 import time
 import typing
-from typing import *
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Iterator,
+    Generator,
+    List,
+    Mapping,
+    Optional,
+    Sequence,
+    Set,
+    Tuple,
+    Union,
+    defaultdict,
+)
 
 try:
     import sortedcontainers
